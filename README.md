@@ -33,6 +33,6 @@ it may not have the splashscreen.
 
 When website is added only with Web App Manifest, Safari doesn't not take splashscreen elements into the account. The solution would be adding `<meta name="apple-mobile-web-app-capable" content="yes">` element to the page alongside with the manifest.
 
-_Note:_ It might be better adding `apple-mobile-web-app-capable` dynamically and only when in browser mode.
+_**Note:** It might be better adding `apple-mobile-web-app-capable` dynamically and only when in browser mode.
 When in standalone mode, it may affects URLs behavior since Web App Manifest installed PWA and `apple-mobile-web-app-capable`
-installed PWA have different URL behavior on iOS.
+installed PWA have different URL behavior on iOS._
