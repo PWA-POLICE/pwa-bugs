@@ -36,3 +36,12 @@ When website is added only with Web App Manifest, Safari doesn't not take splash
 _**Note:** It might be better adding `apple-mobile-web-app-capable` dynamically and only when in browser mode.
 When in standalone mode, it may affects URLs behavior since Web App Manifest installed PWA and `apple-mobile-web-app-capable`
 installed PWA have different URL behavior on iOS._
+
+### Problem: Navigation to a website has infinite loading
+
+If update of a ServiceWorker happens when there is a page navigation in-flight and ServiceWorker `install` event resolves
+sooner than the navigation page is finished loading, then Safari kills old ServiceWorker immediately even without calling `self.skipWaiting()` and that break loading on the page and hence it never loads.
+
+**Solution:**
+
+Check for navigation requests when `install` event happens and do not resolve the promise if there are any. When page loads, send message to the installing ServiceWorker that it may try again to resolve the installation promise (check again for navigation request, repeat all the steps until no navigation requests, then resolve the promise).
