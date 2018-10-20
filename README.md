@@ -3,7 +3,7 @@ This is is a general repo for PWA bugs in all browsers, likely most of them will
 
 ## iOS
 
-Web App Manfest and ServiceWorker API are supported on iOS since 11.3.
+Web App Manfest and ServiceWorker API are supported on iOS since 11.3.  
 Reference: https://twitter.com/rmondello/status/956256845311590400
 
 ### Problem: Sometimes PWA is added in normal mode and not standalone mode (like there is no manifest at all)
