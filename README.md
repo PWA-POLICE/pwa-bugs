@@ -71,6 +71,27 @@ Tested on real devices with these versions:
 - 12.0.0 -- doesn't work
 - 12.0.1 -- doesn't work
 
+### Problem: Cross domain authorization in standalone mode doesn't work
+
+This issue happens since 11.3 when Web App Manifest is used.  
+iOS requires `scope` property in Web App Manifest to determine which URLs allowed to be opened in standalone mode and which are not. When user website navigates to any URL outside of the scope (this includes any URL with different domain) -- it drops the navigation from standalone mode and opens it in Safari. This makes cross-domain authorization impossible.
+
+**Solution:**
+
+Use the iframe. 
+
+Let's suppose there is a foo.com website and its login is on login.foo.com  
+Here is approximately how this can be solved:
+
+- Authorization request is sent to `foo.com`
+- ServiceWorker intercepts this request and cloned request to the server, with `redirect: 'manual'`
+- ServiceWorker tells the page to create `<iframe>` and request a fake url
+- ServiceWorker responds to the `<iframe>` fake url request with the response from syntetic request from the step 2
+- `<ifarme>` handles the response. The response must have a redirect 
+- ServiceWorker intercepts the redirect from `<iframe>` and send another cloned request with `redirect: 'manual'`
+- If type of the response is `basic`, the send the response to original authorization from the step 1
+- If type of the response is `opaqueredirect`, repeat the steps from step 3
+
 ### Problem: Sometimes PWA is added in normal mode and not standalone mode
 _(like there is no manifest at all)_
 
