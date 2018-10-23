@@ -1,12 +1,78 @@
 # PWA Bugs
 This is is a general repo for PWA bugs in all browsers, likely most of them will be about iOS (Web.app)
 
-## iOS
+- [PWA Bugs](#pwa-bugs)
+  * [iOS Safari](#ios-safari)
+    + [Problem: in iOS 12 cache in Cache Storage magically disappears](#problem--in-ios-12-cache-in-cache-storage-magically-disappears)
+    + [Problem: Cookie/Login isn't shared between Safari and standalone mode](#problem--cookie-login-isn-t-shared-between-safari-and-standalone-mode)
+    + [Problem: Sometimes PWA is added in normal mode and not standalone mode](#problem--sometimes-pwa-is-added-in-normal-mode-and-not-standalone-mode)
+    + [Problem: PWA is added without a splashscreen](#problem--pwa-is-added-without-a-splashscreen)
+    + [Problem: Navigation to a website has infinite loading](#problem--navigation-to-a-website-has-infinite-loading)
+    + [Problem: Push Notifications are not supported](#problem--push-notifications-are-not-supported)
+
+## iOS Safari
 
 Web App Manfest and ServiceWorker API are supported on iOS since 11.3.  
 Reference: https://twitter.com/rmondello/status/956256845311590400
 
-### Problem: Sometimes PWA is added in normal mode and not standalone mode (like there is no manifest at all)
+### Problem: in iOS 12 cache in Cache Storage magically disappears
+
+WebKit Bug: https://bugs.webkit.org/show_bug.cgi?id=190269
+
+**Solution:**
+
+This bug makes Cache Storage persist only until user closes Safari (or it's unloaded from memory).
+Basically, the cache is some temporary place and is erased when Safari is closed.
+There is really no workaround around this. It causes this situation.
+
+- User visits a website
+- ServiceWorker caches everything
+- User closes Safari
+- User visits a website again while offline
+- Nothing loads
+
+It also affects websites in standalone mode.
+**This bug also prevents Safari from sharing the cache between standalone mode and normal Safari mode.**
+
+
+### Problem: Cookie/Login isn't shared between Safari and standalone mode
+
+Problem is in all iOS version.
+
+**Solution:**
+
+At the time of writing (iOS 12.0.1), there is only couple version of Safari where the workaround works.
+
+The workaround is to transfer a session through Cache Storage API, which has shared cache in some Safari versions.  
+Approximately how the workaround works:
+
+- User visits a website
+- User opens the Share Popup to add website to the homescreen
+- When popup opens, Safari sends `destination='manifeset'` request to the server
+- ServiceWorker intercepts the requests and send another to the server to generate temporary token
+- ServiceWorker stores the token in special cache in Cache Storage API
+- User taps "Add to Homescreen"
+- User opens website from the homescreen
+- ServiceWorker intercepts the opening and send another request to the server with the saved token
+- Server checks the token and authorizes the user
+- ServiceWorker allows navigation to finish
+- User is automatically authorized in standalone mode
+
+Now gotchas.
+
+It works only in iOS 11.4.1 though. It's broken in iOS 12 and iOS 12.0.1, but supposed to be fixed in the next version.
+WebKit Bug for iOS 12: https://bugs.webkit.org/show_bug.cgi?id=190269
+
+Even though ServiceWorker was introduces in iOS 11.3, it's unknown if anything prior 11.4.1 can support this.
+It either just doesn't work in iOS Emulator at all or doesn't work prioer 11.4.1 (latest 11 emulator version is 11.4.0).
+
+Tested on real devices with these versions: 
+- 11.4.1 -- works
+- 12.0.0 -- doesn't work
+- 12.0.1 -- doesn't work
+
+### Problem: Sometimes PWA is added in normal mode and not standalone mode
+_(like there is no manifest at all)_
 
 Reference: https://twitter.com/nekrtemplar/status/1040282198044291072
 
