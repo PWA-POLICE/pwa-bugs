@@ -1,5 +1,5 @@
 # PWA Bugs
-This is is a general repo for PWA bugs in all browsers, likely most of them will be about iOS (Web.app)
+This is a general repo for PWA bugs in all browsers, likely most of them will be about iOS (Web.app)
 
 - [iOS Safari](#ios-safari)
   * [Problem: in iOS 12 cache in Cache Storage magically disappears](#problem--in-ios-12-cache-in-cache-storage-magically-disappears)
