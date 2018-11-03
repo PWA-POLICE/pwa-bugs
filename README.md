@@ -3,8 +3,8 @@ This is a general repo for PWA bugs in all browsers, likely most of them will be
 
 - [iOS Safari](#ios-safari)
   * [Problem: in iOS 12 cache in Cache Storage magically disappears](#problem-in-ios-12-cache-in-cache-storage-magically-disappears)
-  * [Problem: Cookie/Login isn't shared between Safari and standalone mode](#problem-cookie-login-isn-t-shared-between-safari-and-standalone-mode)
-  * [Problem: Cross domain authorization in standalone mode doesn't work](#problem-cross-domain-authorization-in-standalone-mode-doesn-t-work)
+  * [Problem: Cookie/Login isn't shared between Safari and standalone mode](#problem-cookielogin-isnt-shared-between-safari-and-standalone-mode)
+  * [Problem: Cross domain authorization in standalone mode doesn't work](#problem-cross-domain-authorization-in-standalone-mode-doesnt-work)
   * [Problem: Sometimes PWA is added in normal mode and not standalone mode](#problem-sometimes-pwa-is-added-in-normal-mode-and-not-standalone-mode)
   * [Problem: PWA is added without a splashscreen](#problem-pwa-is-added-without-a-splashscreen)
   * [Problem: Navigation to a website has infinite loading](#problem-navigation-to-a-website-has-infinite-loading)
