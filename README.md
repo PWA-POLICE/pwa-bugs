@@ -88,7 +88,7 @@ Here is approximately how this can be solved:
 - ServiceWorker intercepts this request and cloned request to the server, with `redirect: 'manual'`
 - ServiceWorker tells the page to create `<iframe>` and request a fake url
 - ServiceWorker responds to the `<iframe>` fake url request with the response from syntetic request from the step 2
-- `<ifarme>` handles the response. The response must have a redirect 
+- `<iframe>` handles the response. The response must have a redirect 
 - ServiceWorker intercepts the redirect from `<iframe>` and send another cloned request with `redirect: 'manual'`
 - If type of the response is `basic`, the send the response to original authorization from the step 1
 - If type of the response is `opaqueredirect`, repeat the steps from step 3
