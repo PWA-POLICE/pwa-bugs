@@ -144,3 +144,7 @@ There is no good workaround/polyfill as this feature fully depends on the 3rd pa
 - For Safari on Mac you can set up Push notifications using a proprietary implementation: https://developer.apple.com/notifications/safari-push-notifications/
 - The working (but cumbersome) solution is to wrap your PWA app into a native iOS one using, for example, Cordova.
 - The closest (but still not a "real") pure web solution is to set up a PassBook that can receive push. But this way your notifications are disconnected from the app itself.
+
+### Problem: No migration on new Android phone
+
+When migrating to another Android device all native apps are moved to the new one but none of the PWAs. On the new device for the PWAs there where just empty icons and if clicked on them you could search for the PWA in the Play Store :( Even the top PWAs like Twitter Lite have this problem. 
