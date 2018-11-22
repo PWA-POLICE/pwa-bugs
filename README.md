@@ -9,6 +9,8 @@ This is a general repo for PWA bugs in all browsers, likely most of them will be
   * [Problem: PWA is added without a splashscreen](#problem-pwa-is-added-without-a-splashscreen)
   * [Problem: Navigation to a website has infinite loading](#problem-navigation-to-a-website-has-infinite-loading)
   * [Problem: Push Notifications are not supported](#problem-push-notifications-are-not-supported)
+- [Android](#android)
+  * [Problem: No migration on new Android phone](#problem-no-migration-on-new-android-phone)
 
 
 ## iOS Safari
@@ -144,6 +146,8 @@ There is no good workaround/polyfill as this feature fully depends on the 3rd pa
 - For Safari on Mac you can set up Push notifications using a proprietary implementation: https://developer.apple.com/notifications/safari-push-notifications/
 - The working (but cumbersome) solution is to wrap your PWA app into a native iOS one using, for example, Cordova.
 - The closest (but still not a "real") pure web solution is to set up a PassBook that can receive push. But this way your notifications are disconnected from the app itself.
+
+## Android
 
 ### Problem: No migration on new Android phone
 
