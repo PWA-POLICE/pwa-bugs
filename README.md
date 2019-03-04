@@ -4,7 +4,7 @@ This is a general repo for PWA bugs in all browsers, likely most of them will be
 - [Android WebView](#android-webview)
   * [Problem: different User Agent for different request](#problem-different-user-agent-for-different-request)
 - [Firefox, Android](#firefox-android)
-  * [Problem: Cross-origin redirects for `<img />` tag cause Firefox to open Custom Tab browser](#problem-cross-origin-redirects-for-img-tag-cause-firefox-to-open-custom-tab-browser)
+  * [Problem: Cross-origin redirects for `<img />` tag cause Firefox to open Custom Tab browser](##problem-cross-origin-redirects-for-img--tag-cause-firefox-to-open-custom-tab-browser)
 - [iOS Safari](#ios-safari)
   * [Problem: in iOS 12 cache in Cache Storage magically disappears](#problem-in-ios-12-cache-in-cache-storage-magically-disappears)
   * [Problem: Cookie/Login isn't shared between Safari and standalone mode](#problem-cookielogin-isnt-shared-between-safari-and-standalone-mode)
