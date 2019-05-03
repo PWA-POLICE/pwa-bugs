@@ -1,6 +1,10 @@
 # PWA Bugs
 This is a general repo for PWA bugs in all browsers, likely most of them will be about iOS (Web.app)
 
+- [Android WebView](#android-webview)
+  * [Problem: different User Agent for different request](#problem-different-user-agent-for-different-request)
+- [Firefox, Android](#firefox-android)
+  * [Problem: Cross-origin redirects for `<img />` tag cause Firefox to open Custom Tab browser](#problem-cross-origin-redirects-for-img--tag-cause-firefox-to-open-custom-tab-browser)
 - [iOS Safari](#ios-safari)
   * [Problem: in iOS 12 cache in Cache Storage magically disappears](#problem-in-ios-12-cache-in-cache-storage-magically-disappears)
   * [Problem: Cookie/Login isn't shared between Safari and standalone mode](#problem-cookielogin-isnt-shared-between-safari-and-standalone-mode)
@@ -11,7 +15,28 @@ This is a general repo for PWA bugs in all browsers, likely most of them will be
   * [Problem: Push Notifications are not supported](#problem-push-notifications-are-not-supported)
 - [Android](#android)
   * [Problem: No migration on new Android phone](#problem-no-migration-on-new-android-phone)
+  
+## Android WebView
 
+### Problem: different User Agent for different request
+
+In some browsers with Android WebView, e.g. Opera Mini or UC Browser (Mini?), browser sends different User Agent strings for different request.
+
+To be precise, when ServiceWorker is used and in `'fetch'` listener you do `e.respondWith(fetch(e.request))` for navigation requests, it send original WebView User Agent. But for all subsequent requests, it send custom User Agent which was set by the browser's code.
+
+Doing or not doing `e.respondWith(fetch(e.request))` for non-navigation requests doesn't change anything. The only solution is to stop handling navigation requests in ServiceWorker (or `'fetch'` event at all).
+
+## Firefox, Android
+
+### Problem: Cross-origin redirects for `<img />` tag cause Firefox to open Custom Tab browser
+
+Bug Report: https://bugzilla.mozilla.org/show_bug.cgi?id=1515789
+
+Status: Fix will be shipped in FF67
+
+Cross-origin redirects for `<img />` tag cause Firefox to open Custom Tab browser, just like if Cross Origin navigation happen.
+
+So for example if you have bunch of images request this way on a page, e.g. 100 image, Firefox will open 100 Custom Tabs for your PWA.
 
 ## iOS Safari
 
